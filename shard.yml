@@ -1,0 +1,13 @@
+name: rogheat
+version: 0.1.0
+
+authors:
+  - Gabriel Poma <gabriel.poma@vet-alfort.fr>
+
+targets:
+  rogheat:
+    main: src/rogheat.cr
+
+crystal: 0.24.2
+
+license: MIT
