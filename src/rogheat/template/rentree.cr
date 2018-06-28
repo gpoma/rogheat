@@ -155,8 +155,6 @@ class Rentree < Template
       end
     end
 
-    pp moodle
-
     file.close
   end
 
