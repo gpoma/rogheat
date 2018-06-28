@@ -110,7 +110,7 @@ class Rentree < Template
     self.build
     self.active_directory
     self.moodle
-    #self.password
+    self.password
   end
 
   def build
@@ -158,4 +158,22 @@ class Rentree < Template
     file.close
   end
 
+  def password
+    pw = Output.new name: "PW.csv", directory: "/tmp/Moodle"
+
+    if !Dir.exists? moodle.directory
+      Dir.mkdir_p moodle.directory
+    end
+
+    file = File.new "#{moodle.directory}/#{moodle.name}", "w"
+
+    CSV.build file, moodle.separator, moodle.quote do |csv|
+      csv.row "Nom", "Prenom", "Email", "Login", "Mot de passe"
+      @people.each do |person|
+        csv.row person.lastname, person.firstname, person.email, person.login, person.password
+      end
+    end
+
+    file.close
+  end
 end
