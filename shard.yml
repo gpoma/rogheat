@@ -8,6 +8,10 @@ targets:
   rogheat:
     main: src/rogheat.cr
 
+dependencies:
+  libui:
+    github: fusion/libui.cr
+
 crystal: 0.24.2
 
 license: MIT
