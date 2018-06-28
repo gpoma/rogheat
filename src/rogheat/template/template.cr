@@ -1,5 +1,4 @@
 require "csv"
-require "process"
 
 abstract class Template
     abstract def check

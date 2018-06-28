@@ -1,6 +1,3 @@
-require "file"
-require "dir"
-require "csv"
 require "./template"
 
 struct Person
