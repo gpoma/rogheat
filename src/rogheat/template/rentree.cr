@@ -26,10 +26,10 @@ struct Person
 end
 
 struct Output
-  property name : String
-  property directory : String
-  property quote : Char
-  property separator : Char
+  getter name : String
+  getter directory : String
+  getter quote : Char
+  getter separator : Char
 
   def initialize(@name, @directory = ".", @separator = ';', @quote = '"')
   end
@@ -148,7 +148,7 @@ class Rentree < Template
       # firstname lastname email username password lang deleted cohort1 type1   auth
       csv.row "lastname", "firstname", "email", "username", "password", "deleted", "auth"
       @people.each do |person|
-        csv.row person.lastname, person.firstname, person.email, person.login, 123, 0, "ldap", person.password
+        csv.row person.lastname, person.firstname, person.email, person.login, 123, 0, "ldap"
       end
     end
 
