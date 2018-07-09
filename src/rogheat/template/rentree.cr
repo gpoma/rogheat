@@ -117,7 +117,7 @@ class Rentree < Template
   end
 
   def active_directory
-    ad = Output.new name: "users-db.csv", directory: "/tmp/AD", separator: '\\'
+    ad = Output.new name: "users-db.csv", directory: "AD", separator: '\\'
 
     if !Dir.exists? ad.directory
       Dir.mkdir_p ad.directory
@@ -136,7 +136,7 @@ class Rentree < Template
   end
 
   def moodle
-    moodle = Output.new name: "Moodle.csv", directory: "/tmp/Moodle"
+    moodle = Output.new name: "Moodle.csv", directory: "Moodle"
 
     if !Dir.exists? moodle.directory
       Dir.mkdir_p moodle.directory
@@ -156,7 +156,7 @@ class Rentree < Template
   end
 
   def password
-    pw = Output.new name: "PW.csv", directory: "/tmp/Moodle"
+    pw = Output.new name: "PW.csv", directory: "Moodle"
 
     if !Dir.exists? pw.directory
       Dir.mkdir_p pw.directory
