@@ -12,11 +12,11 @@ struct Person
   getter ine : String
 
   def initialize(input : CSV)
-    @firstname = input["CAND_PRENOM"].capitalize
-    @lastname = input["CAND_NOM"].capitalize
+    @firstname = self.strip(input["CAND_PRENOM"]).capitalize
+    @lastname = self.strip(input["CAND_NOM"]).capitalize
     @ine = input["CAND_BEA"].upcase
-    @login = "#{self.strip(@firstname)}.#{self.strip(@lastname)}"
-    @email = "#{@login}#{@@domain}"
+    @login = "#{@firstname.downcase}.#{@lastname.downcase.squeeze('-')}#{@@domain}"
+    @email = "#{@login}"
     @password = @@pwgen.gen.chomp
   end
 
