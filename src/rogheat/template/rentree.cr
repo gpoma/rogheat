@@ -7,14 +7,18 @@ struct Person
   getter password : String | Nil
   getter email : String | Nil
   getter login : String | Nil
-  getter firstname : String
-  getter lastname : String
-  getter ine : String
+  getter firstname : String = ""
+  getter lastname : String = ""
+  getter ine : String | Nil
+  getter civi : String | Nil
+  getter dob : String | Nil
 
   def initialize(input : CSV)
     @firstname = self.strip(input["CAND_PRENOM"]).capitalize
     @lastname = self.strip(input["CAND_NOM"]).capitalize
     @ine = input["CAND_BEA"].upcase
+    @civi = input["CAND_CIVILITE"]
+    @dob = input["CAND_DATE_NAIS"]
     @login = "#{@firstname.downcase}.#{@lastname.downcase.squeeze('-')}#{@@domain}"
     @email = "#{@login}"
     @password = @@pwgen.gen.chomp
@@ -105,6 +109,7 @@ class Rentree < Template
 
   def generate
     self.build
+    self.oracle
     self.active_directory
     self.moodle
     self.password
@@ -114,6 +119,25 @@ class Rentree < Template
       while @input_file.next
         @people << Person.new @input_file
       end
+  end
+
+  def oracle
+    oracle = Output.new name: "IMPORT_POSTBAC.csv", directory: "Oracle", separator: ';'
+
+    if !Dir.exists? oracle.directory
+      Dir.mkdir_p oracle.directory
+    end
+
+    file = File.new "#{oracle.directory}/#{oracle.name}", "w"
+
+    CSV.build file, oracle.separator, oracle.quote do |csv|
+      @people.each do |person|
+        # 2018002;2505019101Z;MME;BUSI;Alexia;;07011994;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        csv.row nil, person.ine, person.civi, person.lastname, person.firstname, nil, person.dob, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil
+      end
+    end
+
+    file.close
   end
 
   def active_directory
