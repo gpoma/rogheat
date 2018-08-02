@@ -149,7 +149,6 @@ class Rentree < Template
     end
 
     file = File.new "#{ad.directory}/#{ad.name}", "w"
-    file.set_encoding "iso-8859-1"
 
     CSV.build file, ad.separator, ad.quote do |csv|
       csv.row "nom", "givenName", "password", "licence"
