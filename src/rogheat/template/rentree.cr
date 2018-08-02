@@ -129,6 +129,7 @@ class Rentree < Template
     end
 
     file = File.new "#{oracle.directory}/#{oracle.name}", "w"
+    file.set_encoding "iso-8859-1"
 
     CSV.build file, oracle.separator, oracle.quote do |csv|
       @people.each do |person|
@@ -148,6 +149,7 @@ class Rentree < Template
     end
 
     file = File.new "#{ad.directory}/#{ad.name}", "w"
+    file.set_encoding "iso-8859-1"
 
     CSV.build file, ad.separator, ad.quote do |csv|
       csv.row "nom", "givenName", "password", "licence"
