@@ -14,18 +14,18 @@ struct Person
   getter dob : String | Nil
 
   def initialize(input : CSV)
-    @firstname = self.strip(input["CAND_PRENOM"]).capitalize
-    @lastname = self.strip(input["CAND_NOM"]).capitalize
+    @firstname = input["CAND_PRENOM"].capitalize
+    @lastname = input["CAND_NOM"].upcase
     @ine = input["CAND_BEA"].upcase
     @civi = input["CAND_CIVILITE"]
     @dob = input["CAND_DATE_NAIS"]
-    @login = "#{@firstname.downcase}.#{@lastname.downcase.squeeze('-')}#{@@domain}"
+    @login = "#{self.strip(@firstname.downcase)}.#{self.strip(@lastname.downcase)}#{@@domain}"
     @email = "#{@login}"
     @password = @@pwgen.gen.chomp
   end
 
   private def strip(in : String) : String
-    in.downcase.tr("àáâãäçèéêëìíîïñòóôõöùúûüýÿ ", "aaaaaceeeeiiiinooooouuuuyy-")
+    in.downcase.tr("àáâãäçèéêëìíîïñòóôõöùúûüýÿ '", "aaaaaceeeeiiiinooooouuuuyy--")
   end
 end
 
